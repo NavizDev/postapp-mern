@@ -1,12 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##Table of Contents
+## Table of Contents
 
 - Installing create-react-app
 - Installing an extension to help generate React components and convert HTML to JSX (html to JSX by Riaz Laskar)
 - Add AdminLTE [GitHub](https://github.com/ColorlibHQ/AdminLTE)
 - Create the header, sidebar, and footer components.
-  ###Directory ``src/backend`
+
+### Directory `src/backend`
+
 - Install Node.js package `npm init -y`
 - Set up MongoDB cloud
 
@@ -19,7 +21,7 @@ In the **backend** directory, you can run:
 Runs node app in the development mode.<br />
 Open [http://localhost:8081](http://localhost:8081) to view it in the browser
 
-In the project directory, you can run:
+In the **project directory**, you can run:
 
 ### `npm start`
 
