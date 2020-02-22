@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import swal from "sweetalert";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -18,6 +20,26 @@ const SignupSchema = Yup.object().shape({
 });
 
 class register extends Component {
+  submitForm = (values, history) => {
+    console.log({ values });
+    axios
+      .post("http://localhost:8080/register", values)
+      .then(res => {
+        console.log(res);
+        if (res.data.result === "success") {
+          swal("Success!", res.data.message, "success").then(value => {
+            history.push("/login");
+          });
+        } else if (res.data.result === "error") {
+          swal("Error!", res.data.message, "error");
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        swal("Error!", "Unexpected error", "error");
+      });
+  };
+
   showForm = ({
     values,
     errors,
@@ -142,7 +164,8 @@ class register extends Component {
                 confirm_password: ""
               }}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
+                console.log({ values });
+                this.submitForm(values, this.props.history);
                 setSubmitting(false);
               }}
               validationSchema={SignupSchema}
