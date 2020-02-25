@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Create Schema User
 - Install Axios, bcryp, SweetAlert, simple-jwt
 - Create Rest Api **"/register"** and **"/register"**
+- Validate User Registration data @hapi/joi
 - Create Authentication With JWT
 
 ![register](https://user-images.githubusercontent.com/40905751/75087705-b3f1e180-5511-11ea-8086-70ad68e2ee8d.jpg)

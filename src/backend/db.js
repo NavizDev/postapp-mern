@@ -9,7 +9,7 @@ const conectarDB = async () => {
       useFindAndModify: false,
       useCreateIndex: true
     });
-    console.log("conectada");
+    console.log("Conexion con Mongodb Atlass OK");
   } catch (error) {
     console.log(error);
     process.exit(1);

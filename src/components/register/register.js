@@ -6,26 +6,24 @@ import swal from "sweetalert";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
-    .min(2, "username is Too Short!")
-    .max(50, "username is Too Long!")
-    .required("username is Required"),
+    .min(6, "Username demasiado pequeño!")
+    .max(20, "Username es demasiado largo!")
+    .required("Username es requerido"),
   email: Yup.string()
-    .email("Invalid email")
-    .required("Email is Required"),
-  password: Yup.string().required("Password is required"),
+    .email("Email invalido")
+    .required("Email es requerido"),
+  password: Yup.string().required("Password es requerido"),
   confirm_password: Yup.string().oneOf(
     [Yup.ref("password"), null],
-    "Both password need to be the same"
+    "Ambas contraseñas deben ser iguales"
   )
 });
 
 class register extends Component {
   submitForm = (values, history) => {
-    console.log({ values });
     axios
       .post("http://localhost:8080/register", values)
       .then(res => {
-        console.log(res);
         if (res.data.result === "success") {
           swal("Success!", res.data.message, "success").then(value => {
             history.push("/login");
@@ -35,8 +33,7 @@ class register extends Component {
         }
       })
       .catch(error => {
-        console.log(error);
-        swal("Error!", "Unexpected error", "error");
+        swal("Error!", "Error inesperado", "error");
       });
   };
 
@@ -135,7 +132,7 @@ class register extends Component {
               type="submit"
               className="btn btn-primary btn-block btn-flat"
             >
-              Confirm
+              Crear usuario
             </button>
           </div>
         </div>
@@ -145,35 +142,37 @@ class register extends Component {
 
   render() {
     return (
-      <div className="login-box">
-        <div className="login-logo">
-          <a href="../../index2.html">
-            <b>Admin</b>LTE
-          </a>
-        </div>
-        {/* /.login-logo */}
-        <div className="card">
-          <div className="card-body login-card-body">
-            <p className="login-box-msg">Sign in to start your session</p>
-
-            <Formik
-              initialValues={{
-                username: "",
-                email: "",
-                password: "",
-                confirm_password: ""
-              }}
-              onSubmit={(values, { setSubmitting }) => {
-                console.log({ values });
-                this.submitForm(values, this.props.history);
-                setSubmitting(false);
-              }}
-              validationSchema={SignupSchema}
-            >
-              {props => this.showForm(props)}
-            </Formik>
+      <div className="register-page">
+        <div className="login-box">
+          <div className="login-logo">
+            <a href="../../index2.html">
+              <b>Admin</b>LTE
+            </a>
           </div>
-          {/* /.login-card-body */}
+          {/* /.login-logo */}
+          <div className="card">
+            <div className="card-body login-card-body">
+              <p className="login-box-msg">Sign in to start your session</p>
+
+              <Formik
+                initialValues={{
+                  username: "",
+                  email: "",
+                  password: "",
+                  confirm_password: ""
+                }}
+                onSubmit={(values, { setSubmitting }) => {
+                  console.log({ values });
+                  this.submitForm(values, this.props.history);
+                  setSubmitting(false);
+                }}
+                validationSchema={SignupSchema}
+              >
+                {props => this.showForm(props)}
+              </Formik>
+            </div>
+            {/* /.login-card-body */}
+          </div>
         </div>
       </div>
     );

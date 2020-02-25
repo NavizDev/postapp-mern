@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const schema = mongoose.Schema({
   username: String,
   email: String,
@@ -6,5 +7,7 @@ const schema = mongoose.Schema({
   level: { type: String, default: "normal" },
   created: { type: Date, default: Date.now }
 });
+
 schema.index({ username: 1 }, { unique: true });
+
 module.exports = mongoose.model("users", schema);
