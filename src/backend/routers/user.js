@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Users = require("../models/user_schema");
 const { registerValidation, loginValidation } = require("../validation");
 
@@ -44,7 +45,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   //VALIDATE DATA
-  const { error } = registerValidation(req.body);
+  const { error } = loginValidation(req.body);
   if (error)
     return res.json({
       result: "error",
@@ -52,12 +53,27 @@ router.post("/login", async (req, res) => {
     });
 
   //checking if the email exists
-  const emailExist = await Users.findOne({ email: req.body.email });
-  if (!emailExist)
+  const user = await Users.findOne({ email: req.body.email });
+  if (!user)
     return res.json({
       result: "error",
-      message: `Email no existe.`
+      message: `Email no registrado.`
     });
+
+  //Password
+  const validPass = await bcrypt.compare(req.body.password, user.password);
+  if (!validPass)
+    return res.json({ result: "error", message: "Password incorrecto" });
+
+  //create and assign a token
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  res
+    .header("auth-token", token)
+    .json({ result: "success", token, message: "Login successfully" });
+
+  //res.json({ result: "success", message: "Usted esta logueado" });
 });
 
 module.exports = router;
+
+//https://www.youtube.com/watch?v=2jqok-WgelI

@@ -1,5 +1,6 @@
 const express = require("express");
 const userRouter = require("./routers/user");
+const postRoute = require("./routers/post");
 const conectarDB = require("./db");
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(userRouter);
+app.use("/api", postRoute);
 
 app.listen(port, () => {
   console.log("Server is running... on port " + port);
