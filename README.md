@@ -5,7 +5,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Add view **"/register"** and **"/login"** from AdminLTE
 - Use Formik and validation with Yup
 - Create Schema User
+<<<<<<< HEAD
 - Install Axios, bcryp, SweetAlert, simple-jwt
+=======
+- Install Axios, bcryp, SweetAlert
+>>>>>>> 3079dd17a196a84d662b3024ca445279429527df
 - Create Rest Api **"/register"** and **"/register"**
 - Validate User Registration data @hapi/joi
 - Create Authentication With JWT
