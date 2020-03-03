@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const verify = require("./verifyToken");
+const verify = require("../middleware/check-auth");
 
 router.get("/post", verify, (req, res) => {
   res.json({
