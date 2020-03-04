@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -29,14 +29,14 @@ const submitForm = (values, history) => {
       swal("Error!", "Error inesperado", "error");
     });
 };
-const formLogin = props => {
+const FormLogin = () => {
+  let history = useHistory();
   return (
     <div>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values, { setSubmitting }) => {
-          await submitForm(values, props.history);
-          console.log("change setSubmitting");
+          await submitForm(values, history);
           setSubmitting(false);
         }}
         validationSchema={schema}
@@ -106,4 +106,4 @@ const formLogin = props => {
   );
 };
 
-export default formLogin;
+export default FormLogin;
