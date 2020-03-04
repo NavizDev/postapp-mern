@@ -8,9 +8,10 @@ import {
 import Header from "./components/header/header";
 import Sidebar from "./components/sidebar/sidebar";
 import Footer from "./components/footer/footer";
-import Dashboard from "./components/dashboard/dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 import Register from "./pages/register/register";
 import Login from "./pages/login/login";
+import Profile from "./pages/profile/profile";
 
 const isLoggedIn = () => {
   return sessionStorage.getItem("TOKEN_KEY") != null;
@@ -24,19 +25,6 @@ const SecuredRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.authenticate = true;
-    setTimeout(cb, 100); //fake async
-  },
-  signout(cb) {
-    this.authenticate = false;
-    setTimeout(cb, 100);
-  }
-};
-
 export default class App extends Component {
   render() {
     return (
@@ -51,6 +39,7 @@ export default class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            <SecuredRoute exact path="/profile" component={Profile} />
             {isLoggedIn() && <Footer />}
           </div>
         </Switch>
