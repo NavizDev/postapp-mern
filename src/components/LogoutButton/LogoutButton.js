@@ -35,9 +35,9 @@ const LogoutButton = () => {
   let history = useHistory();
 
   return (
-    <a href="#" onClick={() => Logout(history)} className="dropdown-item">
+    <div href="#" onClick={() => Logout(history)} className="dropdown-item">
       <i className="fas fa-sign-out-alt mr-2" /> Cerrar Session
-    </a>
+    </div>
   );
 };
 

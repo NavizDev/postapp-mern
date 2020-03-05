@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = require("./routers/user");
 const postRoute = require("./routers/post");
+const profileRoute = require("./routers/profile");
 const conectarDB = require("./db");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(userRouter);
 app.use("/api", postRoute);
+app.use("/api", profileRoute);
 
 app.listen(port, () => {
   console.log("Server is running... on port " + port);
